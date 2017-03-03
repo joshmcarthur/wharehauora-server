@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120101920) do
+ActiveRecord::Schema.define(version: 20170303024301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170120101920) do
     t.integer  "child_sensor_id"
     t.integer  "ack"
     t.integer  "sub_type"
+    t.integer  "room_id",         null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 20170120101920) do
     t.integer  "home_id"
     t.string   "room_name"
     t.integer  "room_type_id"
+    t.integer  "room_id",      null: false
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -115,4 +117,6 @@ ActiveRecord::Schema.define(version: 20170120101920) do
   add_foreign_key "home_viewers", "homes"
   add_foreign_key "home_viewers", "users"
   add_foreign_key "homes", "users", column: "owner_id"
+  add_foreign_key "readings", "rooms"
+  add_foreign_key "sensors", "rooms"
 end
